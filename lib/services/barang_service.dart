@@ -95,7 +95,6 @@ class BarangService {
     String kategoriId,
     String merkId,
   ) async {
-    print("ID KATEGORI: $kategoriId\nID MERK: $merkId");
     String url = "${global.baseLocalURL}/barang/$kategoriId/$merkId";
     // var url = Uri.http("");
     var response = await http.get(

@@ -5,12 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:simulasi_kredit/providers/barang_provider.dart';
 import 'package:simulasi_kredit/widgets/footer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../common/theme.dart';
 import '../models/barang_model.dart';
 import '../models/merk_model.dart';
 import '../providers/merk_provider.dart';
-import '../widgets/button_navbar.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_dropdown.dart';
 import '../widgets/input_widget.dart';
@@ -122,14 +120,6 @@ class _SimulasiKreditWidgetState extends State<SimulasiKreditWidget> {
     return currentData;
   }
 
-  _launchUrl(String link) async {
-    final Uri url = Uri.parse(link);
-
-    if (!await launchUrl(url)) {
-      throw Exception("Gagal membuka $url");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -144,90 +134,43 @@ class _SimulasiKreditWidgetState extends State<SimulasiKreditWidget> {
         backgroundColor: primaryOrange,
         elevation: 2,
         flexibleSpace: Padding(
-          padding: const EdgeInsets.only(left: 50),
+          padding: const EdgeInsets.only(left: 100),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          "assets/image/png/logo.png",
-                          fit: BoxFit.cover,
-                          height: 100,
-                          width: 100,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Gadai Express",
-                        style: primaryTextStyle.copyWith(
-                          color: white,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ],
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      "https://gadai-express-simulasi.nextspace.cloud/assets/assets/image/png/logo.png",
+                      fit: BoxFit.cover,
+                      height: 80,
+                      width: 80,
+                    ),
                   ),
                   const SizedBox(
-                    width: 10,
+                    height: 10,
                   ),
                   Text(
-                    "Solusi Keuangan Cepat,\nAman & Terjamin",
+                    "Gadai Express",
                     style: primaryTextStyle.copyWith(
                       color: white,
-                      fontSize: 20,
-                      fontWeight: medium,
+                      fontWeight: bold,
                     ),
                   ),
                 ],
               ),
-              Flexible(
-                flex: 7,
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ButtonNavbar(
-                        text: "Beranda",
-                        onPressed: () {
-                          _launchUrl("https://gadaiexpress.id/");
-                        },
-                      ),
-                      ButtonNavbar(
-                        text: "Produk Gadai",
-                        onPressed: () {
-                          _launchUrl("https://gadaiexpress.id/?page_id=28");
-                        },
-                      ),
-                      ButtonNavbar(
-                        text: "Cabang Kami",
-                        onPressed: () {
-                          _launchUrl("https://gadaiexpress.id/?page_id=127");
-                        },
-                      ),
-                      ButtonNavbar(
-                        text: "Syarat & Ketentuan",
-                        onPressed: () {
-                          _launchUrl("https://gadaiexpress.id/#/");
-                        },
-                      ),
-                      ButtonNavbar(
-                        text: "Hubungi Kami",
-                        onPressed: () {
-                          _launchUrl(
-                              "https://api.whatsapp.com/send?phone=6281331361959&text=Hallo%20Daimin,%20Saya%20ingin%20menggadaikan%20barang%20ini%20...");
-                        },
-                      ),
-                    ],
-                  ),
+              const SizedBox(
+                width: 20,
+              ),
+              Text(
+                "Solusi Keuangan Cepat,\nAman & Terjamin",
+                style: primaryTextStyle.copyWith(
+                  color: white,
+                  fontSize: 16,
+                  fontWeight: medium,
                 ),
               ),
             ],
@@ -274,79 +217,76 @@ class _SimulasiKreditWidgetState extends State<SimulasiKreditWidget> {
               child: SizedBox(
                 width: double.maxFinite,
                 height: 500,
-                child: Flexible(
-                  flex: 10,
-                  child: Container(
-                    height: 500,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      color: secondaryOrange,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: isCalculated == true
-                          ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: 20,
+                child: Container(
+                  height: 500,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    color: secondaryOrange,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: isCalculated == true
+                        ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: 20,
+                                ),
+                                child: Text(
+                                  "Hasil Kalkulasi Simulasi Pendanaan Pegadaian untuk\n${widget.barang} ${merkController.text} ${typeController.text}",
+                                  textAlign: TextAlign.center,
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: bold,
+                                    color: white,
                                   ),
-                                  child: Text(
-                                    "Hasil Kalkulasi Simulasi Pendanaan Pegadaian untuk\n${widget.barang} ${merkController.text} ${typeController.text}",
-                                    textAlign: TextAlign.center,
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: bold,
-                                      color: white,
+                                ),
+                              ),
+                              builDataTable(context),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 20,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CustomButton(
+                                      text: "Kembali",
+                                      onPressed: () {
+                                        setState(() {
+                                          isCalculated = false;
+                                        });
+                                      },
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                builDataTable(context),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 20,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      CustomButton(
-                                        text: "Kembali",
-                                        onPressed: () {
-                                          setState(() {
-                                            isCalculated = false;
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Stack(
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: double.maxFinite,
-                                  child: buildCustomTabBar(context),
-                                ),
-                                value.isLoading == true
-                                    ? buildShimmerListBarang(context)
-                                    : barangs.isEmpty
-                                        ? Center(
-                                            child: Text(
-                                              "Pilih merk di atas",
-                                              style: primaryTextStyle.copyWith(
-                                                color: white,
-                                                fontSize: 18,
-                                                fontWeight: medium,
-                                              ),
+                              ),
+                            ],
+                          )
+                        : Stack(
+                            children: [
+                              SizedBox(
+                                height: 60,
+                                width: double.maxFinite,
+                                child: buildCustomTabBar(context),
+                              ),
+                              value.isLoading == true
+                                  ? buildShimmerListBarang(context)
+                                  : barangs.isEmpty
+                                      ? Center(
+                                          child: Text(
+                                            "Pilih merk di atas",
+                                            style: primaryTextStyle.copyWith(
+                                              color: white,
+                                              fontSize: 18,
+                                              fontWeight: medium,
                                             ),
-                                          )
-                                        : buildListBarang(context),
-                              ],
-                            ),
-                    ),
+                                          ),
+                                        )
+                                      : buildListBarang(context),
+                            ],
+                          ),
                   ),
                 ),
               ),
@@ -457,8 +397,6 @@ class _SimulasiKreditWidgetState extends State<SimulasiKreditWidget> {
                             );
                           },
                         );
-
-                        print("MERK ID: $merkId");
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),

@@ -157,8 +157,8 @@ class _DesktopSimulasiKreditPageState extends State<DesktopSimulasiKreditPage> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          "assets/image/png/logo.png",
+                        child: Image.network(
+                          "https://gadai-express-simulasi.nextspace.cloud/assets/assets/image/png/logo.png",
                           fit: BoxFit.cover,
                           height: 100,
                           width: 100,
@@ -501,8 +501,6 @@ class _DesktopSimulasiKreditPageState extends State<DesktopSimulasiKreditPage> {
                             );
                           },
                         );
-
-                        print("MERK ID: $merkId");
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),

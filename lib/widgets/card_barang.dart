@@ -49,21 +49,23 @@ class CardBarang extends StatelessWidget {
                     color: white,
                     shape: BoxShape.circle,
                   ),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => SimulasiKreditPage(
-                            barang: stuffName,
-                            image: image,
-                            idKategori: idKategori,
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SimulasiKreditPage(
+                              barang: stuffName,
+                              image: image,
+                              idKategori: idKategori,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.keyboard_arrow_right_rounded,
-                      color: primaryOrange,
+                        );
+                      },
+                      icon: Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        color: primaryOrange,
+                      ),
                     ),
                   ),
                 ),

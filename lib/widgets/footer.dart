@@ -27,8 +27,8 @@ class FooterWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {},
-                        child: Image.asset(
-                          "assets/image/png/motto.png",
+                        child: Image.network(
+                          "https://gadai-express-simulasi.nextspace.cloud/assets/assets/image/png/motto.png",
                           scale: 20,
                         ),
                       ),

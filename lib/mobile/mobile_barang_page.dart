@@ -43,8 +43,8 @@ class _MobileBarangPageState extends State<MobileBarangPage> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      "assets/image/png/logo.png",
+                    child: Image.network(
+                      "https://gadai-express-simulasi.nextspace.cloud/assets/assets/image/png/logo.png",
                       fit: BoxFit.cover,
                       height: 80,
                       width: 80,
